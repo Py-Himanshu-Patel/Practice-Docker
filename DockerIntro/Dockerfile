@@ -1,11 +1,11 @@
 # choose the os image with python
-FROM python:3.8-apline
+FROM python:3.8-alpine
 
 # set working directory
 WORKDIR /src
 
 # copy requirement file from current location to inside WORKDIR
-COPY ../requirements.txt requirements.txt
+COPY requirements.txt requirements.txt
 
 # use pip3 to install required pacages
 RUN pip3 install -r requirements.txt
