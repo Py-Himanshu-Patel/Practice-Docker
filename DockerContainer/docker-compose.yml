@@ -1,0 +1,25 @@
+# version of docker compose to use
+version: "3.8"
+
+# define services we want to run in our container
+services:
+  # name a service
+  app:
+    # telling compose that dockerfile exists in pwd 
+    # and utilize that to make image
+    build: .
+    # this specify the dir in OS present in container
+    volumes: 
+      # . refers to current dir of YAML file and /django refers 
+      # to directory in docker container 
+      - .:/django
+    ports: 
+      # map port from host OS to the port of OS in container
+      - 8000:8000
+    # name the image and give it a tag 
+    image: app:django
+    # name the container
+    container_name: django_container
+    # run command and make all IP from service available on port 8000
+    command: python3 DjangoProject/manage.py runserver 0.0.0.0:8000
+  
