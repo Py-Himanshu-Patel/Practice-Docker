@@ -34,3 +34,30 @@
     ```
 
 - Now visit `http://127.0.0.1:8000/home/` or add `0.0.0.0` to ALLOWED_HOSTS in settings.py and access `http://0.0.0.0:8000/home/`.
+
+- Some useful commands.
+
+    ```bash
+    # get all docker images in system - pulled from docker hub or created in system
+    docker image ls 
+    ```
+
+    ```bash
+    # get all running cotainers 
+    docker ps
+    ```
+
+    To remove an image we first need to stop and remove the container it is serving.
+
+    ```bash
+    # select the container id
+    docker ps
+    # stop and remove the container - let ba4e1fa71832
+    docker stop ba4e1fa71832
+    # remove the container 
+    docker rm ba4e1fa71832
+    # get the image id
+    docker image ls
+    # remove the image - let 3be01091eb22
+    docker rmi 3be01091eb22
+    ```

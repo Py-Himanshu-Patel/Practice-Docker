@@ -1,0 +1,27 @@
+version: "3.8"
+services: 
+  app: 
+    build: .
+    volumes: 
+      - .:/django
+    ports: 
+      - 8000:8000
+    image: app:django
+    container_name: django_container
+    command: python3 MyProject/manage.py runserver 0.0.0.0:8000
+    # let current service of app depends on db service, so that 
+    # can be created first
+    depends_on: 
+      - db
+  db:
+    # take postgres image from docker hub 
+    image: postgres
+    # map local dir for data to dir in docker container
+    # so when we remove the container the data will persist on local storage
+    volumes: 
+      - ./data/db:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: postgres_db
