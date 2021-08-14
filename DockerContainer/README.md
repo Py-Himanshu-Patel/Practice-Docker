@@ -69,3 +69,27 @@ Now to get another container we need only the `Dockerfile` and `docker-compose.y
 docker-compose run --rm app django-admin startproject DjangoProject
 docker-compose up
 ```
+
+Also we can enter the container running using below command.
+
+```bash
+docker exec -it fc3a5a73194a bash
+```
+
+In case we want to modify the some content in project but not allowed, then it might be created by root user in order to modify those files change the permission.
+
+```bash
+chown -R $USER:$USER /folder
+```
+
+Change some content and reload the page to modification. Also we can restart the container as
+
+```bash
+docker restart fc3a5a73194a
+```
+
+To stop a running container.
+
+```bash
+docker stop fc3a5a73194a
+```
