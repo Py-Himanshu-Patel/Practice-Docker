@@ -14,14 +14,9 @@ services:
     depends_on: 
       - db
   db:
-    # take postgres image from docker hub 
-    image: postgres
-    # map local dir for data to dir in docker container
-    # so when we remove the container the data will persist on local storage
-    volumes: 
-      - ./data/db:/var/lib/postgresql/data
+    image: mysql:5.7
     environment: 
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    container_name: postgres_db
+      MYSQL_DATABASE: 'django-app-db'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes: 
+      - ./data/mysql/db:/var/lib/mysql

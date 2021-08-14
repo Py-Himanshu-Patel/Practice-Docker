@@ -61,3 +61,9 @@
     # remove the image - let 3be01091eb22
     docker rmi 3be01091eb22
     ```
+
+- If the build fails then user/owner of directory may me root change it as follow
+
+```bash
+sudo chown -R $USER <path-to-folder>
+```

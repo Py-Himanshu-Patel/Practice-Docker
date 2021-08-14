@@ -1,5 +1,5 @@
 # os we need in container
-FROM python:3.8-slim-buster
+FROM python:3.8
 
 # this make any python output appear on terminal
 # set to any non zero value
