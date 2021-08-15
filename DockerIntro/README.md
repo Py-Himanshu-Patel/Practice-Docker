@@ -214,3 +214,53 @@ sudo docker stop daemon_dave
 # OR
 sudo docker stop c2c4e57c12c4
 ```
+
+## Automatic container restarts
+
+specify the `--restart` flag with the `docker run` command.
+
+```bash
+sudo docker run --restart=always --name daemon_alice -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done"
+```
+
+In this example the --restart flag has been set to always . Docker will try to restart the container no matter what exit code is returned. Alternatively, we can specify a value of on-failure which restarts the container if it exits with a non-zero exit code. The on-failure flag also accepts an optional restart count.
+
+```bash
+--restart=on-failure:5
+```
+
+## Finding out more about our container
+
+```bash
+himanshu in ~ : sudo docker inspect MyCont 
+[
+    {
+        "Id": "0f4f4c018f7f8482cc4429fbbd847b8b363c797096083e821f89a186f9f0c57a",
+        "Created": "2021-08-15T15:57:25.981893178Z",
+        "Path": "/bin/sh",
+        "Args": [
+            "-c",
+            "while true; do echo hello world; sleep 1; done"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            ...
+```
+
+## Deleting a container
+
+```bash
+sudo docker rm 80430f8d0921
+```
+
+There isn’t currently a way to delete all containers, but you can slightly cheat with a command like the following:
+
+```bash
+sudo docker rm -f `sudo docker ps -a -q`
+```
+
+This command will list all of the current containers using the docker ps command. The `-a` flag lists all containers, and the `-q` flag only returns the container IDs rather than the rest of the information about your containers. This list is then passed to
+the `docker rm` command, which deletes each container. The `-f` flag force removes any running containers. If you’d prefer to protect those containers, omit the flag.
